@@ -6,10 +6,10 @@ using namespace std;
 
 // Answer 1
 bool isUnique(string s) {
-  bool counting_table[256] = {false, };
+  bool counting_table[256] = {false, };  // Explain how about the rest 255 bools
   for (int i = 0; i < s.length(); i++) {
     int val = s[i];
-    if (counting_table[val] == true)
+    if (counting_table[val])
       return false;
     counting_table[val] = true;
   }
@@ -69,9 +69,7 @@ bool isAnagram(string s1, string s2) {
     if (table[s2[i]] == 0)
       completeChar++;
   }
-  if (totalChar != completeChar)
-    return false;
-  return true;
+  return totalChar == completeChar
 }
 
 // Answer 5
@@ -83,7 +81,7 @@ void replaceSpace(char *str) {
   }
 
   int newLength = strlen(str) + numSpace * 2;
-  str[newLength] = 0;
+  str[newLength] = '\0';
   newLength--;
 
   for (int i = strlen(str) - 1; i >=0; i--) {
@@ -91,7 +89,7 @@ void replaceSpace(char *str) {
       str[newLength] = '0';
       str[newLength - 1] = '2';
       str[newLength - 2] = '%';
-      newLength = newLength - 3;
+      newLength -= 3;
 
     } else {
       str[newLength] = str[i];
@@ -142,7 +140,8 @@ void clearRowCol(int *array, int r, int c) {
       }
     }
   }
-
+  free(row);
+  free(col);
 }
 
 // Answer 8
@@ -154,7 +153,7 @@ bool isRotation(char* s1, char* s2) {
   strcpy(newStr, s1);
   strcat(newStr, s1);
 
-  char* p = strstr(newStr, s2);
+  bool p = strstr(newStr, s2);
   free(newStr);
   return p;
 }
