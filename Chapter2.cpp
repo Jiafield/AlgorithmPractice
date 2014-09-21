@@ -29,7 +29,6 @@ Node* buildLinkedList(int length) {
   }
   return head;
 }
-
 Node *buildCorruptList(int length) {
   Node *head = new Node(0);
   Node *tail = head;

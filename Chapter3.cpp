@@ -115,6 +115,23 @@ void Hanoi(int n, Stack<int> &src, Stack<int> &dest, Stack<int> &buf) {
   }
 }
 
+void HanoiExtra(int n, Stack<int> &src, Stack<int> &dest,
+		 Stack<int> &buf1, Stack<int> &buf2) {
+  if (n > 1) {
+    HanoiExtra(n - 2, src, buf1, dest, buf2);
+    buf2.push(src.pop());
+    cout << "Move " << buf2.peek() << " from " << src.index << " to " << buf2.index << endl;
+    dest.push(src.pop());
+    cout << "Move " << dest.peek() << " from " << src.index << " to " << dest.index << endl;
+    dest.push(buf2.pop());
+    cout << "Move " << dest.peek() << " from " << buf2.index << " to " << dest.index << endl;
+    HanoiExtra(n - 2, buf1, dest, src, buf2);
+  } else if (n == 1) {
+    dest.push(src.pop());
+    cout << "Move " << dest.peek() << " from " << src.index << " to " << dest.index << endl;    
+  }
+}
+
 // Answer 3.5
 template<class T>
 class MyQueue {
@@ -169,7 +186,7 @@ void sortStack(Stack<int> &s) {
 
 int main() {
   srand(time(NULL));
-
+  
   // Test 3.2
   StackWithMin<int> sMin;
   for (int i = 0; i < 25; i++) {
@@ -185,14 +202,15 @@ int main() {
       }
     }
   }
+  
 
   // Test 3.4
-  Stack<int> src("Source"), buf("Buffer"), dest("Destination");
-  for (int i = 5; i > 0; i--)
+  Stack<int> src("Source"), buf("Buffer"), dest("Destination"), buf2("Buffer2");
+  for (int i = 20; i > 0; i--)
     src.push(i);
   cout << "Source:" << endl;
   src.printStack();
-  Hanoi(5, src, dest, buf);
+  HanoiExtra(5, src, dest, buf, buf2);
   cout << "Final Destination Look: " << endl;
   dest.printStack();
   cout << endl;
@@ -226,6 +244,6 @@ int main() {
   sStack.printStack();
   sortStack(sStack);
   sStack.printStack();
-
+  
   return 0;
 }
