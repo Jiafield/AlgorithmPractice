@@ -42,8 +42,10 @@ if __name__ == "__main__":
     print nextLargerPalindrome(9);
     print nextLargerPalindrome(12);
     print nextLargerPalindrome(21);
+    print nextLargerPalindrome(22);
     print nextLargerPalindrome(123)
     print nextLargerPalindrome(321);
+    print nextLargerPalindrome(888);
     print nextLargerPalindrome(899);
     print nextLargerPalindrome(999);
     print nextLargerPalindrome(9899);
